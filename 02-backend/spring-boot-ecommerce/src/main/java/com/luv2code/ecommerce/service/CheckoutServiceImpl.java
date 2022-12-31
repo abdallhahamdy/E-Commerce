@@ -23,7 +23,6 @@ public class CheckoutServiceImpl implements CheckoutService {
 
     public CheckoutServiceImpl(CustomerRepository customerRepository,
                                @Value("${stripe.key.secret}") String secretKey) {
-
         this.customerRepository = customerRepository;
 
         // initialize Stripe API with secret key
@@ -61,7 +60,6 @@ public class CheckoutServiceImpl implements CheckoutService {
             // we found them ... let's assign them accordingly
             customer = customerFromDB;
         }
-
         customer.add(order);
 
         // save to the database

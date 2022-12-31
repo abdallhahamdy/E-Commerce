@@ -9,8 +9,8 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductCategoryMenuComponent implements OnInit {
 
-  productCategories: ProductCategory[];
-  
+  productcategory: ProductCategory[] = [];
+
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class ProductCategoryMenuComponent implements OnInit {
     this.productService.getProductCategories().subscribe(
       data => {
         console.log('Product Categories=' + JSON.stringify(data));
-        this.productCategories = data;
+        this.productcategory = data;
       }
     );
   }

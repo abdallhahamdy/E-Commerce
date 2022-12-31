@@ -20,22 +20,19 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
     @Value("${allowed.origins}")
     private String[] theAllowedOrigins;
-
     private EntityManager entityManager;
 
     @Autowired
     public MyDataRestConfig(EntityManager theEntityManager) {
         entityManager = theEntityManager;
     }
-
-
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
         HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.POST,
-                                              HttpMethod.DELETE, HttpMethod.PATCH};
+                                                HttpMethod.DELETE, HttpMethod.PATCH};
 
-        // disable HTTP methods for ProductCategory: PUT, POST, DELETE and PATCH
+        // disable HTTP methods for ProductCategory: PUT, POSt, DELETE and PATCH
         disableHttpMethods(Product.class, config, theUnsupportedActions);
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
         disableHttpMethods(Country.class, config, theUnsupportedActions);
@@ -49,7 +46,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         cors.addMapping(config.getBasePath() + "/**").allowedOrigins(theAllowedOrigins);
     }
 
-    private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
+    private static void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
         config.getExposureConfiguration()
                 .forDomainType(theClass)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
@@ -61,7 +58,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         // expose entity ids
         //
 
-        // - get a list of all entity classes from the entity manager
+        // - gets a list of all entity classes from the entity manager
         Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
 
         // - create an array of the entity types
@@ -77,12 +74,3 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         config.exposeIdsFor(domainTypes);
     }
 }
-
-
-
-
-
-
-
-
-
