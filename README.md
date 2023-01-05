@@ -1,4 +1,4 @@
-# fullstack-angular-and-springboot
+# fullstack-angular-and-springboot-ECommerce
 
 •	Database: MySQL
 
